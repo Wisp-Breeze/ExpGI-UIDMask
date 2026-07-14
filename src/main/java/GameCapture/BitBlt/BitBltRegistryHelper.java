@@ -23,10 +23,6 @@ public class BitBltRegistryHelper {
                     valueName,
                     valueData
             );
-        } catch (Exception e) {
-            e.getStackTrace();
-        }
-
+        } catch (Exception e) {e.getStackTrace();}
     }
-
 }
