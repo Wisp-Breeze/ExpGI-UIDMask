@@ -7,7 +7,7 @@
 
 ### （2）如何运行
     它暂时不支持运行，仍在开发中
-
+---
 
 ## BitBlt截图器
 ### 代码来源自BetterGI[[原文件]](https://github.com/babalae/better-genshin-impact/tree/main/Fischless.GameCapture)，原为 **C#** 语言，本阶段正在逐步翻译为 **JAVA**
