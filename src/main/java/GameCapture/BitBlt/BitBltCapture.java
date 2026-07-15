@@ -2,12 +2,12 @@ package GameCapture.BitBlt;
 
 
 import java.util.Map;
-import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
-import GameCapture.GameCaptureFrame;
+import GameCapture.BetterGI_GameCaptureFrame;
 import GameCapture.IGameCapture;
 import org.w3c.dom.css.Rect;
+import com.google.common.base.Stopwatch;
 
 public abstract class BitBltCapture implements IGameCapture { //记得拆 abstract！！！！！
     private boolean _isCapturing = false;
@@ -21,7 +21,7 @@ public abstract class BitBltCapture implements IGameCapture { //记得拆 abstra
         this._isCapturing = capturing;
     }
 
-    final Timer _sizeCheckTimer = new Timer();
+    final Stopwatch _sizeCheckTimer = Stopwatch.createUnstarted();
     final ReentrantLock _rwLock = new ReentrantLock();
     volatile long _hWnd;//需要加锁
     private BitBltSession _session;//需要加锁
@@ -36,7 +36,7 @@ public abstract class BitBltCapture implements IGameCapture { //记得拆 abstra
     }
 
     @Override
-    public GameCaptureFrame Capture() {
+    public BetterGI_GameCaptureFrame Capture() {
         return Capture(false);
     }
 
@@ -60,7 +60,7 @@ public abstract class BitBltCapture implements IGameCapture { //记得拆 abstra
             } catch (Exception e) {e.getStackTrace();}
             finally {_rwLock.unlock();}
 
-
+            CheckSession();
         }
     }
 
@@ -91,7 +91,7 @@ public abstract class BitBltCapture implements IGameCapture { //记得拆 abstra
     }
 
 
-    private GameCaptureFrame Capture(boolean recursive) {
+    private BetterGI_GameCaptureFrame Capture(boolean recursive) {
         if(_hWnd == 0){
             return null;
         }

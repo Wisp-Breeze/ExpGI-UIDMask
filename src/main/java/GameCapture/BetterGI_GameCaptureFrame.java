@@ -4,12 +4,12 @@ package GameCapture;
 import org.opencv.core.Mat;
 import org.opencv.core.Rect;
 
-public abstract class GameCaptureFrame implements AutoCloseable{ //记得拆abstract
+public abstract class BetterGI_GameCaptureFrame implements AutoCloseable{ //记得拆abstract
 
     protected Mat Frame;
     protected Rect CaptureRect;
 
-    public GameCaptureFrame(Mat frame, Rect captureRect){
+    public BetterGI_GameCaptureFrame(Mat frame, Rect captureRect){
         Frame = frame;
         CaptureRect = captureRect;
     }

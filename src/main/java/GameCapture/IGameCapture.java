@@ -10,7 +10,7 @@ public interface IGameCapture extends AutoCloseable {
     void Start(long hWnd);
     void Start(long hWnd, Map<String,Object> settings);
 
-    GameCaptureFrame Capture();
+    BetterGI_GameCaptureFrame Capture();
 
     void Stop();
 }
