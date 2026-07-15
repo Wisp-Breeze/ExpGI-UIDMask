@@ -1,11 +1,11 @@
-package GameCapture.BitBlt;
+package BetterGI_GameCapture.BitBlt;
 
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
-import GameCapture.BetterGI_GameCaptureFrame;
-import GameCapture.IGameCapture;
+import BetterGI_GameCapture.GameCaptureFrame;
+import BetterGI_GameCapture.IGameCapture;
 import org.w3c.dom.css.Rect;
 import com.google.common.base.Stopwatch;
 
@@ -36,7 +36,7 @@ public abstract class BitBltCapture implements IGameCapture { //记得拆 abstra
     }
 
     @Override
-    public BetterGI_GameCaptureFrame Capture() {
+    public GameCaptureFrame Capture() {
         return Capture(false);
     }
 
@@ -91,7 +91,7 @@ public abstract class BitBltCapture implements IGameCapture { //记得拆 abstra
     }
 
 
-    private BetterGI_GameCaptureFrame Capture(boolean recursive) {
+    private GameCaptureFrame Capture(boolean recursive) {
         if(_hWnd == 0){
             return null;
         }

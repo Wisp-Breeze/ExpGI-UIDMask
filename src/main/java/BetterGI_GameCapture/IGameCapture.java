@@ -1,4 +1,4 @@
-package GameCapture;
+package BetterGI_GameCapture;
 
 
 import java.util.Map;
@@ -10,7 +10,7 @@ public interface IGameCapture extends AutoCloseable {
     void Start(long hWnd);
     void Start(long hWnd, Map<String,Object> settings);
 
-    BetterGI_GameCaptureFrame Capture();
+    GameCaptureFrame Capture();
 
     void Stop();
 }
