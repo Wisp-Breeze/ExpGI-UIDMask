@@ -10,9 +10,13 @@
 ---
 
 ## BitBlt截图器
-### 代码来源自BetterGI[[原文件]](https://github.com/babalae/better-genshin-impact/tree/main/Fischless.GameCapture)，原为 **C#** 语言，本阶段正在逐步翻译为 **JAVA**
+- 代码来源自BetterGI[[原文件]](https://github.com/babalae/better-genshin-impact/tree/main/Fischless.GameCapture)
+ 
+- 原为语言为 **C#** ，本阶段正在逐步翻译为 **JAVA**
 
+- 作者是Java小白，有错误的地方，欢迎指出
 ## 部分代码展示
+
 
 ### 原文 C#
 ```csharp
