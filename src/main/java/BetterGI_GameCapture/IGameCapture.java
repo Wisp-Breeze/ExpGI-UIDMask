@@ -1,6 +1,5 @@
 package BetterGI_GameCapture;
 
-
 import java.util.Map;
 
 public interface IGameCapture extends AutoCloseable {

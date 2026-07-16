@@ -4,7 +4,7 @@ package BetterGI_GameCapture;
 import org.opencv.core.Mat;
 import org.opencv.core.Rect;
 
-public abstract class GameCaptureFrame implements AutoCloseable{ //记得拆abstract
+public class GameCaptureFrame implements AutoCloseable{
 
     protected Mat Frame;
     protected Rect CaptureRect;
@@ -23,7 +23,4 @@ public abstract class GameCaptureFrame implements AutoCloseable{ //记得拆abst
             this.Frame.release();
         }
     }
-
-    
-
 }
