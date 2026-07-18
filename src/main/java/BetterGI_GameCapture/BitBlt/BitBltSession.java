@@ -2,9 +2,7 @@ package BetterGI_GameCapture.BitBlt;
 
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.Pointer;
-import java.util.concurrent.ConcurrentLinkedQueue;
-
-import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 public abstract class BitBltSession implements AutoCloseable { //记得拆abstract
     // 窗口句柄
@@ -33,5 +31,19 @@ public abstract class BitBltSession implements AutoCloseable { //记得拆abstra
     // Bitmap buffer 大小
     private /*final*/ int _bufferSize;
 
+    // Bitmap 内存池
+    private final ConcurrentLinkedDeque<Long>
+            _bufferPool = new ConcurrentLinkedDeque<Long>();
+
+    // 窗口原宽高
+    public record Size(
+            int width,
+            int height
+    ){}
+
+    /**
+     *  不是所有的失效情况都能被检测到
+     */
+    public boolean Invalid = false;
 
 }
