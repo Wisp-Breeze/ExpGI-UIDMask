@@ -3,6 +3,11 @@
 [English](README_en.md) |
 [中文](README.md)
 
+    It is currently unknown how to implement this project.
+    If you have a better way,
+    feel free to bring it up or send a PR, thanks!
+
+
 ## 1.Project Description
 ### （1）Development Environment
 *  JDK 26
