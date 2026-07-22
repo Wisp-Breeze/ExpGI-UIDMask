@@ -1,6 +1,6 @@
-# This is an unfinished experimental tool
+# ExpGI-UIDMask
 
-[Engage](README_en.md) |
+[English](README_en.md) |
 [中文](README.md)
 
 ## 1.Project Description
@@ -8,18 +8,25 @@
 *  JDK 26
 *  Maven
 
-### （2）How to operate
+### （2）Dependencies
+*  **JNA** — Calls Windows native APIs (like GDI screenshot, window operations)
+*  **JavaCV / OpenCV** — Handles the captured images
+*  **Guava** — Some handy utilities
+
+### （3）How to operate
     Currently not supported for operation, still under development
 ---
 
-## BitBlt截图器
+## BitBlt Capture
 - The code originates from BetterGI [[Original Document]](https://github.com/babalae/better-genshin-impact/tree/main/Fischless.GameCapture)
- 
-- Original language is **C#** ,This stage is being gradually translated into **JAVA**
 
-- The author is a Java newbie, feel free to point out any mistakes.
+- Original language is **C#** , the BitBlt mode has been translated to **JAVA** ✅
+
+- The author is a Java newbie, feel free to point out any mistakes
+
 ## Partial Code Display
 
+Here's the `Start` method, comparing the original C# and the translated Java:
 
 ### Original Text C#
 ```csharp
@@ -56,26 +63,28 @@
 ### Translation JAVA
 ```java
     @Override
-    public void Start(long hWnd, Map<String, Object> settings) {
-        Object value;
-        if (settings == null || !settings.containsKey("autoFixWin11BitBlt")) return;
-        value = settings.get("autoFixWin11BitBlt");
-        if (value != null && (Boolean) value) {
-            BitBltRegistryHelper.SetDirectXUserGlobalSettings();
+    public void start(long hWnd, Map<String, Object> settings) {
+        // Optional: Win11 BitBlt fix
+        if (settings != null && Boolean.TRUE.equals(settings.get("autoFixWin11BitBlt"))) {
+            BitBltRegistryHelper.setDirectXUserGlobalSettings();
         }
 
-        synchronized (this) {
-            try {
-                _hWnd = hWnd;
-                if (_hWnd == 0) {return;}
-                if (_session != null) {_session.close();}
+        lockSlim.writeLock().lock();
+        try {
+            hWndValue = hWnd;
+            if (hWndValue == 0) {
+                return;
+            }
 
-                _session = null;
-                this.setCapturing(true);
-            } catch (Exception e) {e.getStackTrace();}
-            finally {_rwLock.unlock();}
-
-            CheckSession();
+            if (session != null) {
+                session.close();
+                session = null;
+            }
+            capturing = true;
+        } finally {
+            lockSlim.writeLock().unlock();
         }
+
+        checkSession();
     }
 ```
