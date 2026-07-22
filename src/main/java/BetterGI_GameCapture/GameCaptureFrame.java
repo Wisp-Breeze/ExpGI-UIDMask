@@ -1,26 +1,38 @@
 package BetterGI_GameCapture;
 
+import com.sun.jna.platform.win32.WinDef;
+import org.bytedeco.opencv.opencv_core.Mat;
 
-import org.opencv.core.Mat;
-import org.opencv.core.Rect;
+/**
+ * 游戏截图帧，对应 C# Fischless.GameCapture.GameCaptureFrame
+ */
+public class GameCaptureFrame implements AutoCloseable {
 
-public class GameCaptureFrame implements AutoCloseable{
+    private Mat frame;
+    private WinDef.RECT captureRect;
 
-    protected Mat Frame;
-    protected Rect CaptureRect;
-
-    public GameCaptureFrame(Mat frame, Rect captureRect){
-        Frame = frame;
-        CaptureRect = captureRect;
+    public GameCaptureFrame(Mat frame, WinDef.RECT captureRect) {
+        this.frame = frame;
+        this.captureRect = captureRect;
     }
 
-    public Mat getFrame(){return Frame;}
-    public Rect getCaptureRect(){return CaptureRect;}
+    public GameCaptureFrame(Mat frame) {
+        this(frame, null);
+    }
+
+    public Mat getFrame() {
+        return frame;
+    }
+
+    public WinDef.RECT getCaptureRect() {
+        return captureRect;
+    }
 
     @Override
-    public void close(){
-        if(this.Frame!=null && !this.Frame.empty()){
-            this.Frame.release();
+    public void close() {
+        if (frame != null) {
+            frame.release();
+            frame = null;
         }
     }
 }
